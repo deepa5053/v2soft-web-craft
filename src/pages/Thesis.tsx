@@ -2,8 +2,21 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { FileText, Download } from "lucide-react";
+import { downloadAsPDF, downloadAsWord, extractThesisContent } from "@/utils/downloadUtils";
 
 const Thesis = () => {
+  const handleDownloadPDF = () => {
+    const content = extractThesisContent();
+    downloadAsPDF(content, "AI_in_Workplace_Frontend_Development_Thesis");
+  };
+
+  const handleDownloadWord = () => {
+    const content = extractThesisContent();
+    downloadAsWord(content, "AI_in_Workplace_Frontend_Development_Thesis");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header Section */}
@@ -22,6 +35,24 @@ const Thesis = () => {
               <p>Fall 2024</p>
               <p>[Student Name]</p>
               <p>Supervisor: [Teacher's Name]</p>
+            </div>
+            
+            {/* Download Buttons */}
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                onClick={handleDownloadPDF}
+                className="bg-white text-blue-700 hover:bg-blue-50 font-semibold"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Download as HTML/PDF
+              </Button>
+              <Button 
+                onClick={handleDownloadWord}
+                className="bg-blue-600 text-white hover:bg-blue-500 font-semibold"
+              >
+                <FileText className="w-4 h-4 mr-2" />
+                Download as Word Document
+              </Button>
             </div>
           </div>
         </div>
